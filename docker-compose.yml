@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app-alice:
+    build: ./alice
+    image: app-alice:1.0
+    container_name: app-alice
+    ports:
+      - '8082:8082'
+    depends_on:
+      - app-bob
+    environment:
+      BOB_API_URL: app-bob
+      BOB_API_PORT: 8081
+
+  app-bob:
+    build: ./bob
+    image: app-bob:1.0
+    container_name: app-bob
+    ports:
+      - '8081:8081'
